@@ -67,7 +67,11 @@ function Navbar({ mobileMenuOpen, setMobileMenuOpen }: NavbarProps) {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <span className="text-xl font-bold text-indigo-400">Irvanno Taqi</span>
+            <Link href="/">
+              <span className="text-xl font-bold text-indigo-400 cursor-pointer">
+                Irvanno Taqi
+              </span>
+            </Link>
           </div>
 
           {/* Desktop Nav Links */}
@@ -527,8 +531,8 @@ function ResultsPanel({ funnelData }: ResultsPanelProps) {
         {/* Biggest Drop-off */}
         <KPICard
           label="Biggest Drop-off"
-          value={`${biggestDropStep.dropOffPercent.toFixed(0)}%`}
-          subtext={biggestDropStep.label.split(' ').slice(0, 2).join(' ')}
+          value={totalLostRevenue === 0 ? 'No Leakage! 🎉' : `${biggestDropStep.dropOffPercent.toFixed(0)}%`}
+          subtext={totalLostRevenue === 0 ? 'Perfect Funnel' : biggestDropStep.label.split(' ').slice(0, 2).join(' ')}
           accentColor="amber"
           icon="⚠️"
         />

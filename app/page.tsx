@@ -211,7 +211,7 @@ function HeroSection() {
         <div className="flex justify-center mb-8">
           <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-indigo-400">
             <span className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-pulse" />
-            Open to Senior PM Opportunities
+            Open to PM Opportunities
           </span>
         </div>
 
@@ -354,7 +354,7 @@ function BioShell() {
   const [profileJson, setProfileJson] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const PROMPT = 'irvanno@gopay-core ~ %';
+  const PROMPT = 'irvanno@macbook ~ %';
   const COMMAND = 'curl http://localhost:3000/api/profile';
 
   async function handleRun() {
@@ -391,7 +391,7 @@ function BioShell() {
 
         {/* Window title */}
         <span className="text-xs text-slate-500 tracking-wide select-none">
-          irvanno@gopay-core: ~
+          irvanno@macbook: ~
         </span>
 
         {/* Run button */}
