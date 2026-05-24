@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { syntaxHighlight } from '@/utils/syntaxHighlight';
 
 // ============================================================================
@@ -218,17 +219,21 @@ function HeroSection() {
           <div className="flex-shrink-0">
             <div className="relative w-48 h-48 lg:w-64 lg:h-64">
               {/* Indigo gradient ring outer border */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 p-1">
-                {/* Avatar content: slate background with initials */}
-                <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center border-4 border-slate-800">
-                  <div className="text-center">
-                    <div className="text-5xl lg:text-7xl font-bold text-indigo-400">IT</div>
-                    <p className="text-xs text-slate-500 mt-2 tracking-widest uppercase">Irvanno Taqi</p>
-                  </div>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 p-[3px]">
+                {/* Avatar image with clip wrapper */}
+                <div className="w-full h-full rounded-full overflow-hidden">
+                  <Image
+                    src="/avatar.png"
+                    alt="Irvanno Taqi Irmawan"
+                    width={256}
+                    height={256}
+                    className="w-full h-full object-cover object-top rounded-full"
+                    priority
+                  />
                 </div>
               </div>
 
-              {/* Optional glow effect behind avatar */}
+              {/* Glow effect behind avatar */}
               <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-sky-500/20 rounded-full blur-2xl -z-10" />
             </div>
           </div>
