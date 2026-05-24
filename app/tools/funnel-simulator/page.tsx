@@ -2,20 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-
-// ============================================================================
-// TYPES
-// ============================================================================
-
-interface FunnelStep {
-  id: string;
-  label: string;
-  usersIn: number;
-  usersOut: number;
-  dropOff: number;
-  dropOffPercent: number;
-  revenueLeaked: number;
-}
+import { calculateFunnel, type FunnelStep, type FunnelInput } from '@/utils/funnelMath';
 
 // ============================================================================
 // MAIN PAGE COMPONENT
@@ -197,79 +184,15 @@ function Dashboard() {
 
   // Derived State & Calculations
   const funnelData = useMemo(() => {
-    const steps: FunnelStep[] = [];
-
-    // Step 0: Land on Checkout
-    const usersCheckout = totalMonthlyTraffic * (checkoutLand / 100);
-    const dropOffCheckout = totalMonthlyTraffic - usersCheckout;
-    steps.push({
-      id: 'checkout',
-      label: 'Land on Checkout Page',
-      usersIn: totalMonthlyTraffic,
-      usersOut: usersCheckout,
-      dropOff: dropOffCheckout,
-      dropOffPercent: 100 - checkoutLand,
-      revenueLeaked: dropOffCheckout * averageOrderValue,
-    });
-
-    // Step 1: Select Payment Method
-    const usersPayment = usersCheckout * (selectPaymentMethod / 100);
-    const dropOffPayment = usersCheckout - usersPayment;
-    steps.push({
-      id: 'payment',
-      label: 'Select Payment Method',
-      usersIn: usersCheckout,
-      usersOut: usersPayment,
-      dropOff: dropOffPayment,
-      dropOffPercent: 100 - selectPaymentMethod,
-      revenueLeaked: dropOffPayment * averageOrderValue,
-    });
-
-    // Step 2: OTP / Biometric Verification
-    const usersOTP = usersPayment * (otpVerification / 100);
-    const dropOffOTP = usersPayment - usersOTP;
-    steps.push({
-      id: 'otp',
-      label: 'OTP / Biometric Verification',
-      usersIn: usersPayment,
-      usersOut: usersOTP,
-      dropOff: dropOffOTP,
-      dropOffPercent: 100 - otpVerification,
-      revenueLeaked: dropOffOTP * averageOrderValue,
-    });
-
-    // Step 3: Payment Success
-    const usersSuccess = usersOTP * (paymentSuccess / 100);
-    const dropOffSuccess = usersOTP - usersSuccess;
-    steps.push({
-      id: 'success',
-      label: 'Payment Success',
-      usersIn: usersOTP,
-      usersOut: usersSuccess,
-      dropOff: dropOffSuccess,
-      dropOffPercent: 100 - paymentSuccess,
-      revenueLeaked: dropOffSuccess * averageOrderValue,
-    });
-
-    // Calculate KPIs
-    const totalLostRevenue = steps.reduce((sum, step) => sum + step.revenueLeaked, 0);
-    const actualRevenue = usersSuccess * averageOrderValue;
-    const potentialRevenue = totalMonthlyTraffic * averageOrderValue;
-    const overallConversionRate = (usersSuccess / totalMonthlyTraffic) * 100;
-
-    // Find biggest drop-off step
-    const biggestDropStep = steps.reduce((max, step) => 
-      step.dropOff > max.dropOff ? step : max
-    );
-
-    return {
-      steps,
-      totalLostRevenue,
-      actualRevenue,
-      potentialRevenue,
-      overallConversionRate,
-      biggestDropStep,
+    const input: FunnelInput = {
+      totalMonthlyTraffic,
+      averageOrderValue,
+      checkoutLand,
+      selectPaymentMethod,
+      otpVerification,
+      paymentSuccess,
     };
+    return calculateFunnel(input);
   }, [totalMonthlyTraffic, averageOrderValue, checkoutLand, selectPaymentMethod, otpVerification, paymentSuccess]);
 
   return (
@@ -480,14 +403,7 @@ function ConversionRateInput({
 // ============================================================================
 
 interface ResultsPanelProps {
-  funnelData: {
-    steps: FunnelStep[];
-    totalLostRevenue: number;
-    actualRevenue: number;
-    potentialRevenue: number;
-    overallConversionRate: number;
-    biggestDropStep: FunnelStep;
-  };
+  funnelData: ReturnType<typeof calculateFunnel>;
 }
 
 function ResultsPanel({ funnelData }: ResultsPanelProps) {

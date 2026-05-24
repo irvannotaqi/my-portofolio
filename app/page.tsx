@@ -2,74 +2,13 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { syntaxHighlight } from '@/utils/syntaxHighlight';
 
 // ============================================================================
 // TYPES
 // ============================================================================
 
 type TerminalStatus = 'idle' | 'loading' | 'done' | 'error';
-
-// ============================================================================
-// SYNTAX HIGHLIGHTER
-// Walks a pretty-printed JSON string token by token and wraps each token
-// in a <span> with a colour class. No external library required.
-// ============================================================================
-
-function syntaxHighlight(json: string): React.ReactNode[] {
-  // Regex: captures keys, strings, numbers, booleans, nulls, and punctuation
-  const tokenRegex = /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?|[{}[\],:])/g;
-
-  const nodes: React.ReactNode[] = [];
-  let lastIndex = 0;
-  let match: RegExpExecArray | null;
-
-  while ((match = tokenRegex.exec(json)) !== null) {
-    const token = match[0];
-    const start = match.index;
-
-    // Push any whitespace/newlines between tokens as plain text
-    if (start > lastIndex) {
-      nodes.push(json.slice(lastIndex, start));
-    }
-
-    // Determine token type and assign colour
-    let cls = 'text-slate-400'; // default: punctuation / brackets
-
-    if (/^"/.test(token)) {
-      if (/:$/.test(token)) {
-        // Object key  →  sky blue
-        cls = 'text-sky-400';
-      } else {
-        // String value  →  emerald green
-        cls = 'text-emerald-400';
-      }
-    } else if (/true|false/.test(token)) {
-      // Boolean  →  rose
-      cls = 'text-rose-400';
-    } else if (/null/.test(token)) {
-      // Null  →  rose (dimmer)
-      cls = 'text-rose-300';
-    } else if (/^-?\d/.test(token)) {
-      // Number  →  amber
-      cls = 'text-amber-400';
-    }
-
-    nodes.push(
-      <span key={start} className={cls}>
-        {token}
-      </span>
-    );
-
-    lastIndex = start + token.length;
-  }
-
-  // Trailing whitespace after last token
-  if (lastIndex < json.length) {
-    nodes.push(json.slice(lastIndex));
-  }
-
-  return nodes;
-}
 
 // ============================================================================
 // MAIN PAGE
