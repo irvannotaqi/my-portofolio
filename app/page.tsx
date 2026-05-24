@@ -26,6 +26,7 @@ export default function HomePage() {
 
       <main>
         <HeroSection />
+        <HumanStorySection />
         <BioShellSection />
       </main>
 
@@ -147,80 +148,94 @@ function HeroSection() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
         {/* Badge */}
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center mb-8 lg:justify-start">
           <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-indigo-400">
             <span className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-pulse" />
             Open to PM Opportunities
           </span>
         </div>
 
-        {/* Headline */}
-        <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
-            Fintech-oriented{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-sky-400">
-              Technical
-            </span>
-            <br />
-            Product Manager
-          </h1>
+        {/* 2-Column Layout: Text (left) + Avatar (right) */}
+        <div className="flex flex-col lg:flex-row items-center gap-12 mb-16">
+          {/* Left Column: Headline & CTAs */}
+          <div className="flex-1 text-center lg:text-left">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6 leading-[1.2]">
+              Hi, I'm Irvanno. I spent 7+ years breaking and securing code at{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-sky-400">
+                GoPay and Tokopedia
+              </span>
+              . Now, I'm building the products instead.
+            </h1>
 
-          {/* Sub-headline */}
-          <p className="text-base sm:text-lg lg:text-xl text-slate-400 max-w-2xl mx-auto mb-4 leading-relaxed">
-            7+ years engineering and owning high-volume payment systems
-            across{' '}
-            <span className="text-slate-200 font-medium">GoPay</span>,{' '}
-            <span className="text-slate-200 font-medium">Tokopedia</span>, and{' '}
-            <span className="text-slate-200 font-medium">Gojek</span>.
-          </p>
-          <p className="text-sm sm:text-base text-slate-500 max-w-xl mx-auto mb-12">
-            From SDET writing test automation frameworks to PM writing PRDs —
-            I bridge the gap between engineering precision and product delivery.
-          </p>
+            {/* Sub-headline */}
+            <p className="text-base sm:text-lg text-slate-400 mb-8 leading-relaxed">
+              From SDET writing test automation frameworks to PM writing PRDs —
+              I bridge the gap between engineering precision and product delivery.
+            </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            {/* Primary CTA */}
-            <Link
-              href="/tools/funnel-simulator"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-200 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 group"
-            >
-              <svg
-                className="h-4 w-4 transition-transform group-hover:-translate-y-0.5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4">
+              {/* Primary CTA */}
+              <Link
+                href="/tools/funnel-simulator"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-200 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 group"
               >
-                <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
-              </svg>
-              View Payment Funnel Dashboard
-            </Link>
+                <svg
+                  className="h-4 w-4 transition-transform group-hover:-translate-y-0.5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                </svg>
+                View Payment Funnel Dashboard
+              </Link>
 
-            {/* Ghost CTA */}
-            <Link
-              href="/blog"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-slate-600 hover:border-slate-400 text-slate-300 hover:text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-200 group"
-            >
-              <svg
-                className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
+              {/* Ghost CTA */}
+              <Link
+                href="/blog"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-slate-600 hover:border-slate-400 text-slate-300 hover:text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-200 group"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
-                  clipRule="evenodd"
-                />
-                <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />
-              </svg>
-              Read Product Teardowns
-            </Link>
+                <svg
+                  className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
+                    clipRule="evenodd"
+                  />
+                  <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />
+                </svg>
+                Read Product Teardowns
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Column: Avatar Container */}
+          <div className="flex-shrink-0">
+            <div className="relative w-48 h-48 lg:w-64 lg:h-64">
+              {/* Indigo gradient ring outer border */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 p-1">
+                {/* Avatar content: slate background with initials */}
+                <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center border-4 border-slate-800">
+                  <div className="text-center">
+                    <div className="text-5xl lg:text-7xl font-bold text-indigo-400">IT</div>
+                    <p className="text-xs text-slate-500 mt-2 tracking-widest uppercase">Irvanno Taqi</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Optional glow effect behind avatar */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-sky-500/20 rounded-full blur-2xl -z-10" />
+            </div>
           </div>
         </div>
 
         {/* Scroll hint */}
-        <div className="flex justify-center mt-20">
+        <div className="flex justify-center lg:justify-start mt-16">
           <div className="flex flex-col items-center gap-1 text-slate-600">
             <span className="text-xs tracking-widest uppercase">
               Explore
@@ -238,6 +253,38 @@ function HeroSection() {
               />
             </svg>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// HUMAN STORY SECTION — "The Human Behind the Code"
+// ============================================================================
+
+function HumanStorySection() {
+  return (
+    <section className="bg-white py-20 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl">
+        {/* Section Headline */}
+        <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">
+          From Quality Gatekeeper to Product Builder
+        </h2>
+
+        {/* Narrative Block with left-border accent */}
+        <div className="border-l-4 border-indigo-500 pl-6 space-y-6">
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+            For over seven years, my job across Gojek, Tokopedia, and GoPay was to stress-test architectures, predict edge cases, and ensure financial transaction funnels didn't fail under multi-million user loads. I became obsessed with the brittle points where elegant code meets messy reality—the exact moments where a single millisecond of latency or a forgotten null check could cascade into millions of rupiah in lost revenue.
+          </p>
+
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+            Over time, I realized I didn't just want to protect the roadmap—I wanted to design it. Watching product decisions ship without understanding their technical cost, or worse, watching technical excellence get shipped but not marketed, felt like a waste of both worlds.
+          </p>
+
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+            I'm transitioning into Product Management because I love turning complex technical constraints into seamless user experiences. I want to be the bridge: fluent in the language of engineers, but speaking to business and users with clarity and conviction.
+          </p>
         </div>
       </div>
     </section>
@@ -479,9 +526,15 @@ function Footer() {
     <footer className="bg-slate-900 text-slate-400 py-12 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm">
-            © 2025 Irvanno Taqi Irmawan. All rights reserved.
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <p className="text-sm">
+              © 2025 Irvanno Taqi Irmawan. All rights reserved.
+            </p>
+            <span className="hidden sm:block text-slate-700">•</span>
+            <p className="text-xs text-slate-500 italic">
+              Built with Next.js & Vitest. Fueled by iced Americano and zero failing assertions.
+            </p>
+          </div>
           <div className="flex gap-6 text-sm">
             <a
               href="https://www.linkedin.com/in/irvanno-taqi-irmawan-ab1315155/"
