@@ -21,6 +21,15 @@ const config: Config = {
           900: '#0f172a',
           950: '#020617',
         },
+        studio: {
+          canvas: '#F7F4EE',
+          cream: '#EFE9DD',
+          charcoal: '#1F2937',
+          muted: '#6B7280',
+          separator: '#DDD6C8',
+          cobalt: '#2563EB',
+          terra: '#C67C4E',
+        },
       },
       keyframes: {
         fadeInUp: {
