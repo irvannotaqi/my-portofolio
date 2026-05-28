@@ -49,8 +49,7 @@ function Navbar({ mobileMenuOpen, setMobileMenuOpen }: NavbarProps) {
   const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
-    { label: 'Portfolio', href: '/portfolio' },
-    { label: 'Blog/Teardowns', href: '/blog' },
+    { label: 'Product Teardowns', href: '/writing' },
   ];
 
   return (
@@ -149,17 +148,17 @@ function HeroSection() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
         {/* Badge */}
-        <div className="flex justify-center mb-8 lg:justify-start">
+        <div className="flex justify-center mb-8 lg:justify-start opacity-0 animate-fade-in-up" style={{ animationDelay: '0ms' }}>
           <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-indigo-400">
             <span className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-pulse" />
             Open to PM Opportunities
           </span>
         </div>
 
-        {/* 2-Column Layout: Text (left) + Avatar (right) */}
-        <div className="flex flex-col lg:flex-row items-center gap-12 mb-16">
-          {/* Left Column: Headline & CTAs */}
-          <div className="flex-1 text-center lg:text-left">
+        {/* 2-Column Responsive Layout: Grid with Smart Ordering */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 mb-16 lg:items-center">
+          {/* 1. Text Section (Headline + Sub-text) — order-1 on mobile, col 1 row 1 on desktop */}
+          <div className="text-center lg:text-left lg:col-start-1 lg:row-start-1 opacity-0 animate-fade-in-up" style={{ animationDelay: '100ms' }}>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6 leading-[1.2]">
               Hi, I'm Irvanno. I spent 7+ years breaking and securing code at{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-sky-400">
@@ -169,74 +168,75 @@ function HeroSection() {
             </h1>
 
             {/* Sub-headline */}
-            <p className="text-base sm:text-lg text-slate-400 mb-8 leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-400 mb-8 leading-relaxed opacity-0 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
               From SDET writing test automation frameworks to PM writing PRDs —
               I bridge the gap between engineering precision and product delivery.
             </p>
+           </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4">
-              {/* Primary CTA */}
-              <Link
-                href="/tools/funnel-simulator"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-200 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 group"
-              >
-                <svg
-                  className="h-4 w-4 transition-transform group-hover:-translate-y-0.5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
-                </svg>
-                View Payment Funnel Dashboard
-              </Link>
+           {/* 3. Avatar Section — order-2 on mobile, col 2 row 1-2 on desktop */}
+           <div className="flex flex-shrink-0 justify-center order-2 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:items-center opacity-0 animate-fade-in-up" style={{ animationDelay: '150ms' }}>
+             <div className="flex flex-col items-center gap-4 lg:gap-5">
+               {/* Avatar image with ring */}
+               <div className="relative w-48 h-48 lg:w-64 lg:h-64">
+                 {/* Indigo gradient ring outer border */}
+                 <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 p-[3px]">
+                   {/* Avatar image with clip wrapper */}
+                   <div className="w-full h-full rounded-full overflow-hidden">
+                     <Image
+                       src="/avatar.png"
+                       alt="Irvanno Taqi Irmawan"
+                       width={256}
+                       height={256}
+                       className="w-full h-full object-cover object-top rounded-full"
+                       priority
+                     />
+                   </div>
+                 </div>
 
-              {/* Ghost CTA */}
-              <Link
-                href="/blog"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-slate-600 hover:border-slate-400 text-slate-300 hover:text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-200 group"
-              >
-                <svg
-                  className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
-                    clipRule="evenodd"
-                  />
-                  <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />
-                </svg>
-                Read Product Teardowns
-              </Link>
-            </div>
-          </div>
+                 {/* Glow effect behind avatar */}
+                 <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-sky-500/20 rounded-full blur-2xl -z-10" />
+               </div>
 
-          {/* Right Column: Avatar Container */}
-          <div className="flex-shrink-0">
-            <div className="relative w-48 h-48 lg:w-64 lg:h-64">
-              {/* Indigo gradient ring outer border */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 p-[3px]">
-                {/* Avatar image with clip wrapper */}
-                <div className="w-full h-full rounded-full overflow-hidden">
-                  <Image
-                    src="/avatar.png"
-                    alt="Irvanno Taqi Irmawan"
-                    width={256}
-                    height={256}
-                    className="w-full h-full object-cover object-top rounded-full"
-                    priority
-                  />
-                </div>
-              </div>
+               {/* Recruiter CTA Cluster */}
+               <div className="flex w-full flex-col sm:flex-row lg:flex-col gap-3 lg:gap-3 justify-center items-center lg:items-center">
+                   {/* View Resume Button */}
+                   <a
+                     href="/resume.pdf"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="w-full sm:w-auto lg:w-full inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-700 bg-slate-900 text-white px-6 py-3 font-semibold hover:bg-white hover:text-slate-900 hover:border-white transition-colors duration-200 group"
+                   >
+                   <svg
+                     className="h-4 w-4 transition-transform group-hover:translate-y-0.5"
+                     xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 20 20"
+                     fill="currentColor"
+                   >
+                     <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.3A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
+                   </svg>
+                   View Resume
+                 </a>
 
-              {/* Glow effect behind avatar */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-sky-500/20 rounded-full blur-2xl -z-10" />
-            </div>
-          </div>
+                   {/* Email Button */}
+                   <a
+                     href="mailto:irvanno.taqi@gmail.com"
+                     className="w-full sm:w-auto lg:w-full inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-300 bg-transparent text-slate-100 px-6 py-3 font-semibold hover:bg-white hover:text-slate-900 hover:border-white transition-colors duration-200 group"
+                   >
+                   <svg
+                     className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                     xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 20 20"
+                     fill="currentColor"
+                   >
+                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                   </svg>
+                   Email me
+                 </a>
+               </div>
+             </div>
+           </div>
         </div>
 
         {/* Scroll hint */}
@@ -270,31 +270,31 @@ function HeroSection() {
 
 function HumanStorySection() {
   return (
-    <section className="bg-white py-20 px-4 sm:px-6 lg:px-8">
+    <section className="bg-white py-20 px-4 sm:px-6 lg:px-8 opacity-0 animate-fade-in-up" style={{ animationDelay: '0ms' }}>
       <div className="mx-auto max-w-3xl">
         {/* Section Headline */}
         <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">
           From Quality Gatekeeper to Product Builder
         </h2>
 
-        {/* Narrative Block with left-border accent */}
-        <div className="border-l-4 border-indigo-500 pl-6 space-y-6">
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            For over seven years, my job across Gojek, Tokopedia, and GoPay was to stress-test architectures, predict edge cases, and ensure financial transaction funnels didn't fail under multi-million user loads. I became obsessed with the brittle points where elegant code meets messy reality—the exact moments where a single millisecond of latency or a forgotten null check could cascade into millions of rupiah in lost revenue.
-          </p>
+         {/* Narrative Block with left-border accent */}
+         <div className="border-l-4 border-indigo-500 pl-6 space-y-6">
+           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+             For over seven years, my job across Gojek, Tokopedia, and GoPay was to stress-test architectures, predict edge cases, and ensure financial transaction funnels didn't fail under multi-million user loads. I became obsessed with the brittle points where elegant code meets messy reality—the exact moments where a single millisecond of latency or a forgotten null check could cascade into millions of rupiah in lost revenue.
+           </p>
 
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            Over time, I realized I didn't just want to protect the roadmap—I wanted to design it. Watching product decisions ship without understanding their technical cost, or worse, watching technical excellence get shipped but not marketed, felt like a waste of both worlds.
-          </p>
+           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+             Over time, I realized I didn't just want to protect the roadmap—I wanted to design it. Watching product decisions ship without understanding their technical cost, or worse, watching technical excellence get shipped but not marketed, felt like a waste of both worlds.
+           </p>
 
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            I'm transitioning into Product Management because I love turning complex technical constraints into seamless user experiences. I want to be the bridge: fluent in the language of engineers, but speaking to business and users with clarity and conviction.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
+           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+             I'm transitioning into Product Management because I love turning complex technical constraints into seamless user experiences. I want to be the bridge: fluent in the language of engineers, but speaking to business and users with clarity and conviction.
+           </p>
+         </div>
+       </div>
+     </section>
+   );
+ }
 
 // ============================================================================
 // BIO SHELL SECTION — light bg wrapper + dark terminal chrome
@@ -305,7 +305,7 @@ function BioShellSection() {
     <section className="bg-slate-50 py-20 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
         {/* Section heading */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 opacity-0 animate-fade-in-up" style={{ animationDelay: '0ms' }}>
           <p className="text-xs font-semibold uppercase tracking-widest text-indigo-500 mb-3">
             Developer API
           </p>
@@ -322,6 +322,12 @@ function BioShellSection() {
             to fetch it in real time.
           </p>
         </div>
+
+        {/* cURL Snippet */}
+        <CurlSnippet command="curl -L https://www.irvanno.com/api/profile" prompt="irvanno@irvanno.com ~ %" />
+
+        {/* Spacing */}
+        <div className="mb-4" />
 
         {/* The terminal */}
         <BioShell />
@@ -345,8 +351,7 @@ function BioShell() {
   const [profileJson, setProfileJson] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const PROMPT = 'irvanno@macbook ~ %';
-  const COMMAND = 'curl http://localhost:3000/api/profile';
+  const PROMPT = 'irvanno@irvanno.com ~ %';
 
   async function handleRun() {
     setStatus('loading');
@@ -370,9 +375,9 @@ function BioShell() {
   }
 
   return (
-    <div className="bg-slate-950 rounded-2xl shadow-2xl border border-slate-800 overflow-hidden font-mono text-sm">
+    <div className="bg-slate-950 rounded-2xl shadow-2xl border border-white/[0.06] overflow-hidden font-mono text-sm">
       {/* ── Terminal chrome bar ── */}
-      <div className="flex items-center justify-between px-4 py-3 bg-slate-900 border-b border-slate-800">
+      <div className="flex items-center justify-between px-4 py-3 bg-slate-900 border-b border-white/[0.06]">
         {/* macOS traffic lights */}
         <div className="flex items-center gap-2">
           <span className="h-3 w-3 rounded-full bg-rose-500" />
@@ -382,7 +387,7 @@ function BioShell() {
 
         {/* Window title */}
         <span className="text-xs text-slate-500 tracking-wide select-none">
-          irvanno@macbook: ~
+          irvanno@irvanno.com: ~
         </span>
 
         {/* Run button */}
@@ -440,14 +445,8 @@ function BioShell() {
         </button>
       </div>
 
-      {/* ── Terminal body ── */}
-      <div className="px-5 py-5 min-h-64 max-h-[560px] overflow-y-auto overflow-x-auto">
-        {/* The prompt line — always visible */}
-        <div className="flex items-start gap-2 flex-wrap">
-          <span className="text-emerald-500 select-none shrink-0">{PROMPT}</span>
-          <span className="text-slate-300 break-all">{COMMAND}</span>
-        </div>
-
+       {/* ── Terminal body ── */}
+       <div className="px-5 py-5 min-h-64 max-h-[560px] overflow-y-auto overflow-x-auto" style={{ background: 'radial-gradient(ellipse at top left, #1e293b 0%, #020617 70%)' }}>
         {/* ── Idle: blinking cursor ── */}
         {status === 'idle' && (
           <div className="mt-2 flex items-center gap-0.5">
@@ -507,9 +506,11 @@ function BioShell() {
             <p className="text-slate-600 text-xs mb-2 select-none">
               HTTP/1.1 200 OK · Content-Type: application/json
             </p>
-            <pre className="leading-relaxed whitespace-pre text-xs sm:text-sm">
-              {syntaxHighlight(profileJson)}
-            </pre>
+            <pre
+              className="leading-relaxed whitespace-pre text-xs sm:text-sm"
+              style={{ color: '#cbd5e1' }}
+              dangerouslySetInnerHTML={{ __html: syntaxHighlight(profileJson) }}
+            />
             {/* Trailing prompt after output */}
             <div className="mt-4 flex items-center gap-0.5">
               <span className="text-emerald-500 select-none">{PROMPT}</span>
@@ -517,6 +518,84 @@ function BioShell() {
             </div>
           </div>
         )}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================================
+// CURL SNIPPET — standalone component for displaying and copying the API command
+// ============================================================================
+
+interface CurlSnippetProps {
+  command: string;
+  prompt: string;
+}
+
+function CurlSnippet({ command, prompt }: CurlSnippetProps) {
+  const [copied, setCopied] = useState(false);
+
+  function handleCopy() {
+    navigator.clipboard.writeText('curl -L https://www.irvanno.com/api/profile').then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }
+
+  return (
+    <div className="rounded-2xl border border-white/[0.06] bg-slate-900 overflow-hidden font-mono text-sm">
+      {/* ── Header Row ── */}
+      <div className="flex items-center justify-between px-4 py-2.5 bg-slate-900 border-b border-white/[0.05]">
+        {/* Label */}
+        <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">
+          CURL ME
+        </span>
+        {/* Copy Button — Always Visible */}
+        <button
+          onClick={handleCopy}
+          className="inline-flex items-center gap-1.5 border border-slate-700/70 hover:border-slate-600 text-slate-300 hover:text-slate-100 px-2 py-1 rounded-md text-xs font-medium transition-all duration-200"
+          title="Copy command"
+        >
+          {copied ? (
+            <>
+              <svg
+                className="h-3.5 w-3.5 text-emerald-400"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span className="text-emerald-400">Copied!</span>
+            </>
+          ) : (
+            <>
+              <svg
+                className="h-3.5 w-3.5"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path d="M8 3a1 1 0 011-1h2a1 1 0 011 1v2h4V4a2 2 0 00-2-2H8a2 2 0 00-2 2v2h4V3z" />
+                <path
+                  fillRule="evenodd"
+                  d="M3 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm5 11a1 1 0 100-2 1 1 0 000 2z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>Copy</span>
+            </>
+          )}
+        </button>
+      </div>
+
+      {/* ── Command Line ── */}
+      <div className="px-4 py-3.5 bg-slate-900 overflow-x-auto">
+        <span className="text-slate-100 leading-relaxed whitespace-pre">{command}</span>
       </div>
     </div>
   );
