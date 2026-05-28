@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { NavbarWrapper } from '@/components/NavbarWrapper';
+import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Irvanno Taqi — Product Manager & Fintech Builder',
@@ -29,8 +31,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id">
-      <body className="bg-slate-50 text-slate-900 antialiased">
+      <body className="antialiased" style={{ backgroundColor: '#F7F4EE', color: '#1C1917' }}>
+        <NavbarWrapper />
         {children}
+        <Footer />
       </body>
     </html>
   );
